@@ -8,7 +8,7 @@ const GameCard = ({game}) => (
 
 
 
-            <img src={require("../images/123.png")} alt="Game Cover"/>
+            <img src={game.img} alt="Game Cover"/>
 
         </div>
         <div className="content">

@@ -7,7 +7,7 @@ const games = [
         name: "Some text",
         price: 93,
         players: "1-2",
-       // img: "http://c2.plzcdn.com/ZillaIMG/5fdd16a82ab9bf21dcfdfdcd0ecbd010_1394231304.jpg",
+        img: "123.png",
         duration: 60
     },
     {
@@ -15,7 +15,7 @@ const games = [
         name: "Some text 2",
         price: 34.23,
         players: "1",
-        //img: '{require(\'../images/123.png\')}',
+        img: "123.png",
         duration: 160
     },
     {
@@ -23,17 +23,33 @@ const games = [
         name: "Some text 3",
         price: 56.00,
         players: "1-8",
+        img: "123.png",
         duration: 76
     }
 ];
 
+class App extends React.Component{
+    state = {
+        games: []
+    };
+
+    componentDidMount(){
+        this.setState({games})
+    }
+
+    render(){
+        return(
+            <div className="ui container">
+                <GameList games={this.state.games}/>
+            </div>
+        )
+    }
+
+}
 
 
-const App = () => (
-    <div className="ui container">
-        <GameList games={games}/>
-    </div>
-)
+
+
 
 
 export default App;
