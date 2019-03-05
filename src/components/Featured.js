@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Featured = (featured, toggleFeatured, gameId) => (
+const Featured = ({featured, toggleFeatured, gameId}) => (
     <span>
         {
             featured ? (
@@ -21,7 +21,7 @@ const Featured = (featured, toggleFeatured, gameId) => (
 );
 
 Featured.propTypes = {
-    features: PropTypes.bool.isRequired,
+    featured: PropTypes.bool.isRequired,
     toggleFeatured: PropTypes.func.isRequired,
     gameId: PropTypes.number.isRequired
 };
