@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 const tags = [
     { _id: 1, name: "text 1"},
@@ -19,7 +20,8 @@ class GameForm extends Component{
         players: "",
         featured: false,
         tags: [],
-        genre: 1
+        genre: 1,
+        publisher: 0
     };
 
     handleSubmit = e => {
@@ -62,6 +64,7 @@ class GameForm extends Component{
                         <div className="field">
                             <label htmlFor="price">Price</label>
                             <input type="number" id="price" name="price"
+                                   min="0"
                                    value={this.state.price}
                                    onChange={this.handleChange}
                             />
@@ -70,6 +73,7 @@ class GameForm extends Component{
                         <div className="field">
                             <label htmlFor="duration">Duration (min)</label>
                             <input type="number" id="duration" name="duration"
+                                   min="0"
                                    value={this.state.duration}
                                    onChange={this.handleChange}
                             />
@@ -143,12 +147,39 @@ class GameForm extends Component{
 
                 </div>
 
+                <div className="field">
+                    <label>Publishers</label>
+                    <select name="publisher"
+                            value={this.state.publisher}
+                            onChange={this.handleChange}
+                    >
+                        <option value="0">Choose Publisher</option>
+                        {this.props.publishers.map(publisher => (
+                            <option value={publisher._id} key={publisher._id}>{publisher.name}</option>
+                        ))}
+
+                    </select>
+                </div>
+
                 <button className="ui button" type="submit">Create</button>
 
             </form>
 
         );
-    }
-}
+    };
+};
+
+GameForm.propTypes = {
+    publishers: PropTypes.arrayOf(
+        PropTypes.shape({
+            _id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired
+        })
+    ).isRequired
+};
+
+GameForm.defaultProps = {
+    publishers: []
+};
 
 export default GameForm;
