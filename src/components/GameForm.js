@@ -13,8 +13,8 @@ class GameForm extends Component{
         );
     };
 
-    handleNameChange = e => this.setState( {name: e.target.value});
-    handleDescriptionChange = e => this.setState({description: e.target.value});
+    handleChange = e => this.setState({[e.target.name]: e.target.value});
+
 
     render() {
         return (
@@ -23,7 +23,7 @@ class GameForm extends Component{
                     <label htmlFor="name">Game Title</label>
                     <input type="text" id="name" name="name" placeholder="Game title"
                            value={this.state.name}
-                           onChange={this.handleNameChange}
+                           onChange={this.handleChange}
                     />
                 </div>
 
@@ -33,7 +33,7 @@ class GameForm extends Component{
                     <label htmlFor="description">Game Description</label>
                     <textarea type="text" id="description" name="description" placeholder="Game description"
                            value={this.state.description}
-                           onChange={this.handleDescriptionChange}
+                           onChange={this.handleChange}
                     />
                 </div>
 

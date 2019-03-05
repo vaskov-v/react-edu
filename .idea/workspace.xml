@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8594add5-0291-4e7a-9fbc-ef51564b8985" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/GameForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Featured.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Featured.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -123,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1810" />
     <option name="y" value="-14" />
     <option name="width" value="1296" />
@@ -226,12 +223,12 @@
       <workItem from="1551426335995" duration="6713000" />
       <workItem from="1551630588003" duration="774000" />
       <workItem from="1551684132360" duration="29256000" />
-      <workItem from="1551772308351" duration="8004000" />
+      <workItem from="1551772308351" duration="8627000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61979000" />
+    <option name="totallyTimeSpent" value="62602000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -243,7 +240,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49679488" visible="true" weight="0.09799789" />
       <window_info id="Structure" order="1" sideWeight="0.5008026" side_tool="true" weight="0.09799789" />
