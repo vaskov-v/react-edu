@@ -6,7 +6,7 @@ import GameCard from "./GameCard";
 
 const GameList = ({games}) =>(
     <div className="ui three cards">
-        {games.map(game => <GameCard game={game} key={game.id}/>)}
+        {games.map(game => <GameCard game={game} key={game._id}/>)}
     </div>
 
 );

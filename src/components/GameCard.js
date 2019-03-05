@@ -9,7 +9,7 @@ const GameCard = ({game, toggleFeatured}) => (
             <Featured
                 featured={game.featured}
                 toggleFeatured={toggleFeatured}
-                gameId={game.id}
+                gameId={game._id}
             />
 
             <img src={game.img} alt="Game Cover"/>

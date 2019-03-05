@@ -5,7 +5,7 @@ import GameForm from "./GameForm";
 
 const games = [
     {
-        id: 1,
+        _id: 1,
         featured: true,
         name: "Some text",
         price: 93,
@@ -14,7 +14,7 @@ const games = [
         duration: 60
     },
     {
-        id: 2,
+        _id: 2,
         featured: true,
         name: "Some text 2",
         price: 34.23,
@@ -23,7 +23,7 @@ const games = [
         duration: 160
     },
     {
-        id: 3,
+        _id: 3,
         featured: false,
         name: "Some text 3",
         price: 56.00,
@@ -55,12 +55,14 @@ class App extends React.Component{
     render(){
         return(
             <div className="ui container">
-                <GameForm />
-                <br/>
+
                 <GameList
                     games={this.state.games}
                     toggleFeatured={this.toggleFeatured}
                 />
+                <br/>
+                <br/>
+                <GameForm/>
             </div>
         );
     };
