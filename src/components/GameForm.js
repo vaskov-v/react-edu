@@ -21,7 +21,8 @@ class GameForm extends Component{
         featured: false,
         tags: [],
         genre: 1,
-        publisher: 0
+        publisher: 0,
+        img: ""
     };
 
     handleSubmit = e => {
@@ -40,7 +41,6 @@ class GameForm extends Component{
 
     handleGenderChange = genre => this.setState({genre: genre._id});
 
-
     toggleTag = tag =>
         this.state.tags.includes(tag._id)
             ? this.setState({tags: this.state.tags.filter(id => id !== tag._id)})
@@ -50,14 +50,48 @@ class GameForm extends Component{
     render() {
         return (
             <form className="ui form" onSubmit={this.handleSubmit}>
-                <div className="field">
-                    <label htmlFor="name">Game Title</label>
-                    <input type="text" id="name" name="name" placeholder="Game title"
-                           value={this.state.name}
-                           onChange={this.handleChange}
-                    />
+
+                <div className="ui grid">
+                    <div className="twelve wide column">
+
+                        <div className="field">
+                            <label htmlFor="name">Game Title</label>
+                            <input type="text" id="name" name="name" placeholder="Game title"
+                                   value={this.state.name}
+                                   onChange={this.handleChange}
+                            />
+                        </div>
+
+                        <div className="field">
+                            <label htmlFor="description">Game Description</label>
+                            <textarea type="text" id="description" name="description" placeholder="Game description"
+                                      value={this.state.description}
+                                      onChange={this.handleChange}
+                            />
+                        </div>
+
+                    </div>
+                    <div className="four wide column">
+                        {
+                            this.state.img ? (
+                                <img className="ui image" src={this.state.img} alt="Image"/>
+                            ):(
+                                <img className="ui image" src="http://via.placeholder.com/250x250" alt="Image"/>
+                            )
+                        }
+
+                    </div>
                 </div>
 
+
+                <div className="field">
+                    <label htmlFor="img">Img</label>
+                    <input type="text" id="img" name="img" placeholder="Image URL"
+                           value={this.state.img}
+                           onChange={this.handleChange}
+                    />
+
+                </div>
 
                 <div>
                     <div className="three fields">
@@ -88,14 +122,6 @@ class GameForm extends Component{
                         </div>
 
                     </div>
-                </div>
-
-                <div className="field">
-                    <label htmlFor="description">Game Description</label>
-                    <textarea type="text" id="description" name="description" placeholder="Game description"
-                           value={this.state.description}
-                           onChange={this.handleChange}
-                    />
                 </div>
 
 
