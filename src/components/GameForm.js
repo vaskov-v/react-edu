@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ReactImageFallback from "react-image-fallback";
 
 const tags = [
     { _id: 1, name: "text 1"},
@@ -72,14 +73,12 @@ class GameForm extends Component{
 
                     </div>
                     <div className="four wide column">
-                        {
-                            this.state.img ? (
-                                <img className="ui image" src={this.state.img} alt="Image"/>
-                            ):(
-                                <img className="ui image" src="http://via.placeholder.com/250x250" alt="Image"/>
-                            )
-                        }
-
+                        <ReactImageFallback
+                            fallbackImage="http://via.placeholder.com/250x250"
+                            src={this.state.img}
+                            alt="Image"
+                            className="ui image"
+                        />
                     </div>
                 </div>
 
