@@ -4,9 +4,9 @@ import GameCard from "./GameCard";
 
 
 
-const GameList = ({games}) =>(
+const GameList = ({games, toggleFeatured}) =>(
     <div className="ui three cards">
-        {games.map(game => <GameCard game={game} key={game._id}/>)}
+        {games.map(game => <GameCard game={game} toggleFeatured={toggleFeatured} key={game._id}/>)}
     </div>
 
 );

@@ -16,7 +16,7 @@ const GameCard = ({game, toggleFeatured}) => (
 
         </div>
         <div className="content">
-           <a className="header">{game.name}</a>
+           <a href="/" className="header">{game.name}</a>
            <div className="meta">
                <i className="icon users"></i> {game.players}
                <i className="icon wait"></i>{game.duration} min.

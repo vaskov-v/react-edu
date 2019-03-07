@@ -65,7 +65,7 @@ class App extends React.Component{
 
 
 
-    toggleFeatured (gameId){
+    toggleFeatured = (gameId) => {
         alert(gameId);
     };
 
