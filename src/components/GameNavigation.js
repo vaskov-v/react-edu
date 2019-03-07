@@ -8,6 +8,10 @@ const GameNavigation = ({showGameForm}) => (
         <a className="item" onClick={showGameForm}>
             <i className="icon plus" /> Add New Game
         </a>
+        <div className="right menu">
+            <a className="item">Login</a>
+            <a className="item">Help</a>
+        </div>
     </div>
 );
 
