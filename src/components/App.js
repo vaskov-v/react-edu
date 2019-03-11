@@ -58,19 +58,34 @@ class App extends React.Component{
 
     componentDidMount(){
         this.setState({
-            games: _orderBy(games, ["featured","name"], ["desc", "asc"])
+            games: this.sortGames(games)
         });
     };
 
-
-
+    sortGames(games){
+        return _orderBy(games, ["featured","name"], ["desc", "asc"]);
+    }
 
     toggleFeatured = (gameId) => {
-        alert(gameId);
+        const newGames = this.state.games.map(game => {
+            if(game._id === gameId) return {...game, featured: !game.featured};
+            return game;
+        })
+        this.setState({games: newGames})
     };
 
     showGameForm = () => this.setState({showGameForm: true});
     hideGameForm = () => this.setState({showGameForm: false});
+    addGame = (game) => this.setState({
+        games: this.sortGames([
+            ...this.state.games,
+            {
+                ...game,
+                _id: this.state.games.length + 1
+            }
+        ]),
+        showGameForm: false
+    });
 
 
     render(){
@@ -83,7 +98,10 @@ class App extends React.Component{
                 <div className="ui stackable grid">
                     {this.state.showGameForm &&(
                         <div className="nine wide column">
-                            <GameForm publishers={publishers} cancel={this.hideGameForm}/>
+                            <GameForm publishers={publishers}
+                                      cancel={this.hideGameForm}
+                                      submit={this.addGame}
+                            />
                         </div>
                     )}
 
