@@ -64,7 +64,7 @@ class GameForm extends Component{
     handleChange = e =>
         this.setState({
             data: { ...this.state.data, [e.target.name]: e.target.type === "number"
-                    ? parseInt(e.target.value, 10) : e.target.value
+                    ? parseFloat(e.target.value) : e.target.value
             }
         });
 
@@ -128,7 +128,7 @@ class GameForm extends Component{
                         <div className={errors.price ? "field error" : "field"}>
                             <label htmlFor="price">Price</label>
                             <input type="number" id="price" name="price"
-                                   min="0"
+                                   min="0" step="0.1"
                                    value={data.price}
                                    onChange={this.handleChange}
                             />

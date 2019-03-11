@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8594add5-0291-4e7a-9fbc-ef51564b8985" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/components/GameForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameForm.js" afterDir="false" />
+>>>>>>> GameForm
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,8 +38,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="388">
               <caret line="92" column="13" lean-forward="true" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+=======
+            <state relative-caret-position="117">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+>>>>>>> GameForm
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -46,7 +55,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Featured.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="51">
+=======
+            <state relative-caret-position="34">
+>>>>>>> GameForm
               <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -58,7 +71,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/GameNavigation.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="289">
+=======
+            <state relative-caret-position="272">
+>>>>>>> GameForm
               <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -67,11 +84,19 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/GameForm.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
               <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/GameForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="481">
+              <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+>>>>>>> GameForm
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -79,7 +104,11 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
+=======
+      <file pinned="false" current-in-tab="false">
+>>>>>>> GameForm
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
@@ -91,7 +120,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/FormInlineMessage.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="119">
+=======
+            <state relative-caret-position="102">
+>>>>>>> GameForm
               <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -103,8 +136,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/GameCard.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="453">
               <caret line="42" selection-start-line="42" selection-end-line="47" selection-end-column="43" />
+=======
+            <state relative-caret-position="304">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+>>>>>>> GameForm
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -115,7 +153,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/GameList.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="187">
+=======
+            <state relative-caret-position="153">
+>>>>>>> GameForm
               <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -296,7 +338,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="120011000" />
+=======
+    <option name="totallyTimeSpent" value="109447000" />
+>>>>>>> GameForm
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -309,9 +355,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.86998916" visible="true" weight="0.12328767" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8698885" visible="true" weight="0.12328767" />
+>>>>>>> GameForm
       <window_info id="Structure" order="1" sideWeight="0.5008026" side_tool="true" weight="0.09799789" />
       <window_info id="npm" order="2" sideWeight="0.13001083" side_tool="true" weight="0.12328767" />
       <window_info id="Favorites" order="3" sideWeight="0.5008026" side_tool="true" weight="0.09799789" />
@@ -420,6 +469,16 @@
     <entry file="file://$PROJECT_DIR$/src/App.js" />
     <entry file="file://$PROJECT_DIR$/src/App.test.js" />
     <entry file="file://$PROJECT_DIR$/src/logo.svg" />
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> GameForm
     <entry file="file://$PROJECT_DIR$/src/images/matthew.png" />
     <entry file="file://$PROJECT_DIR$/src/components/GamesList" />
     <entry file="file://$PROJECT_DIR$/node_modules/@types/node/globals.d.ts">
@@ -469,8 +528,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="68">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
+=======
+        <state relative-caret-position="153">
+          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+>>>>>>> GameForm
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -479,7 +543,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/GameNavigation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="272">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -487,6 +551,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/components/GameList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -501,16 +566,44 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/FormInlineMessage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+>>>>>>> GameForm
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FormInlineMessage.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Featured.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="119">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+=======
+        <state relative-caret-position="34">
+          <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+>>>>>>> GameForm
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/components/GameCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="42" selection-start-line="42" selection-end-line="47" selection-end-column="43" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+>>>>>>> GameForm
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -519,18 +612,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/GameCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="42" selection-start-line="42" selection-end-line="47" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App.js">
-      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="388">
           <caret line="92" column="13" lean-forward="true" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+=======
+        <state relative-caret-position="304">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+>>>>>>> GameForm
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -539,8 +627,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/GameForm.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="357">
           <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+=======
+        <state relative-caret-position="481">
+          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+>>>>>>> GameForm
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
