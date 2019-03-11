@@ -3,20 +3,23 @@ import PropTypes from "prop-types";
 import ReactImageFallback from "react-image-fallback";
 import FormInlineMessage from "./FormInlineMessage";
 
+const initialData = {
+    _id: null,
+    name: "",
+    description: "",
+    price: 0,
+    duration: 0,
+    players: "",
+    featured: false,
+    tags: [],
+    genre: 1,
+    publisher: 0,
+    img: ""
+}
+
 class GameForm extends Component{
     state = {
-        data: {
-            name: "",
-            description: "",
-            price: 0,
-            duration: 0,
-            players: "",
-            featured: false,
-            tags: [],
-            genre: 1,
-            publisher: 0,
-            img: ""
-        },
+        data: initialData,
         errors: {}
     };
 
@@ -31,6 +34,21 @@ class GameForm extends Component{
         if(data.duration === 0) errors.duration = "This field can't be zero";
 
         return errors;
+    }
+
+    componentDidMount() {
+        if(this.props.game._id){
+            this.setState({data: this.props.game});
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.game._id && nextProps.game._id !== this.state.data._id) {
+            this.setState({data: nextProps.game})
+        }
+        if(!nextProps.game._id){
+            this.setState({data: initialData});
+        }
     }
 
     handleSubmit = e => {
@@ -186,7 +204,15 @@ GameForm.propTypes = {
         })
     ).isRequired,
     cancel: PropTypes.func.isRequired,
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    game: PropTypes.shape({
+       name: PropTypes.string,
+       price: PropTypes.number,
+       players: PropTypes.string,
+       duration: PropTypes.number,
+       img: PropTypes.string,
+       featured: PropTypes.bool
+    }).isRequired
 };
 
 GameForm.defaultProps = {
