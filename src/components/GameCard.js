@@ -20,7 +20,7 @@ class GameCard extends React.Component{
             <div className="ui card">{
                 this.state.showDescription ? (
                     <div className="content">
-                        <div class="description">
+                        <div className="description">
                             {game.description}
                         </div>
                     </div>

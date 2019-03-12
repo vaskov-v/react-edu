@@ -24,6 +24,7 @@ const games = [
         players: "1-2",
         img: "123.png",
         duration: 60,
+        description: "Some description 1",
         publishers: 1
 
     },
@@ -35,6 +36,7 @@ const games = [
         players: "1",
         img: "123.png",
         duration: 160,
+        description: "Some description 2",
         publishers: 2
 
     },
@@ -46,6 +48,7 @@ const games = [
         players: "1-8",
         img: "123.png",
         duration: 76,
+        description: "Some description 3",
         publishers: 1
     }
 ];
