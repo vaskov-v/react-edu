@@ -211,6 +211,7 @@ GameForm.propTypes = {
        players: PropTypes.string,
        duration: PropTypes.number,
        img: PropTypes.string,
+       description: PropTypes.string,
        featured: PropTypes.bool
     }).isRequired
 };
