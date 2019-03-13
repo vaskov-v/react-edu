@@ -1,5 +1,6 @@
 import React from "react";
 import _orderBy from "lodash/orderBy";
+import _find from "lodash/find";
 import GameList from "./GameList";
 import GameForm from "./GameForm";
 import GameNavigation from "./GameNavigation";
@@ -35,20 +36,25 @@ class App extends React.Component{
     }
 
     toggleFeatured = (gameId) => {
-        const newGames = this.state.games.map(game => {
-            if(game._id === gameId) return {...game, featured: !game.featured};
-            return game;
+        const game = _find(this.state.games, {_id: gameId});
+        return this.updateGame({
+            ...game,
+            featured: !game.featured
         })
-        this.setState({games: newGames})
     };
 
     showGameForm = () => this.setState({showGameForm: true, selectedGame: {}});
     hideGameForm = () => this.setState({showGameForm: false, selectedGame: {}});
     saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
-    updateGame = game => this.setState({
-        games: this.sortGames(this.state.games.map(item => item._id === game._id ? game : item)),
-        showGameForm: false
-    });
+    updateGame = gameData =>
+      api.games.update(gameData).then(game =>
+      this.setState({
+          games: this.sortGames(
+            this.state.games.map(item => item._id === game._id ? game : item)
+          ),
+          showGameForm: false
+      })
+     );
     addGame = gameData =>
       api.games.create(gameData).then(
         game => this.setState({
