@@ -7,11 +7,11 @@ import api from "../api";
 
 const publishers = [
     {
-        _id: 1,
+        _id: "1",
         name: "Publisher_1"
     },
     {
-      _id: 2,
+      _id: "2",
       name: "Publisher_2"
     }
 ];
@@ -28,7 +28,7 @@ class App extends React.Component{
         api.games
           .fetchAll()
           .then(games => this.setState({games: this.sortGames(games)}));
-    };
+    }
 
     sortGames(games){
         return _orderBy(games, ["featured","name"], ["desc", "asc"]);
@@ -49,16 +49,13 @@ class App extends React.Component{
         games: this.sortGames(this.state.games.map(item => item._id === game._id ? game : item)),
         showGameForm: false
     });
-    addGame = (game) => this.setState({
-        games: this.sortGames([
-            ...this.state.games,
-            {
-                ...game,
-                _id: new Date().getTime()
-            }
-        ]),
-        showGameForm: false
-    });
+    addGame = gameData =>
+      api.games.create(gameData).then(
+        game => this.setState({
+            games: this.sortGames([...this.state.games, game ]),
+            showGameForm: false
+        })
+      );
     deleteGame = game => this.setState({
         games: this.state.games.filter(item => item._id !== game._id)
     }) ;
