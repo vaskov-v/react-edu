@@ -82,7 +82,7 @@ class App extends React.Component{
             ...this.state.games,
             {
                 ...game,
-                _id: this.state.games.length + 1
+                _id: new Date().getTime()
             }
         ]),
         showGameForm: false
