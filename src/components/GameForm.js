@@ -19,7 +19,8 @@ const initialData = {
 class GameForm extends Component{
     state = {
         data: initialData,
-        errors: {}
+        errors: {},
+        loading: false
     };
 
     validate(data) {
@@ -52,13 +53,15 @@ class GameForm extends Component{
 
     handleSubmit = e => {
         e.preventDefault();
-        const errors = this.validate(this.state.data);
+        const errors = {};
         this.setState({errors});
-
         if(Object.keys(errors).length === 0){
-            this.props.submit(this.state.data);
+            this.setState({loading: true});
+            this.props.submit(this.state.data)
+            .catch(err => this.setState({errors: err.response.data.errors, loading: false }));
         }
-    };
+    }
+
 
     handleChange = e =>
         this.setState({
@@ -74,9 +77,10 @@ class GameForm extends Component{
         });
 
     render() {
-        const {data, errors} = this.state;
+        const {data, errors, loading} = this.state;
+        const formClassNames = loading ? "ui form loading" : "ui form";
         return (
-            <form className="ui form" onSubmit={this.handleSubmit}>
+            <form className={formClassNames} onSubmit={this.handleSubmit}>
 
                 <div className="ui grid">
                     <div className="twelve wide column">
