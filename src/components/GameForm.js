@@ -3,30 +3,23 @@ import PropTypes from "prop-types";
 import ReactImageFallback from "react-image-fallback";
 import FormInlineMessage from "./FormInlineMessage";
 
-const tags = [
-    { _id: 1, name: "text 1"},
-    { _id: 2, name: "text 2"}
-];
-
-const genres = [
-    { _id: 1, name: "Some text 1"},
-    { _id: 2, name: "Some text 2"}
-];
+const initialData = {
+    _id: null,
+    name: "",
+    description: "",
+    price: 0,
+    duration: 0,
+    players: "",
+    featured: false,
+    tags: [],
+    genre: 1,
+    publisher: 0,
+    img: ""
+}
 
 class GameForm extends Component{
     state = {
-        data: {
-            name: "",
-            description: "",
-            price: 0,
-            duration: 0,
-            players: "",
-            featured: false,
-            tags: [],
-            genre: 1,
-            publisher: 0,
-            img: ""
-        },
+        data: initialData,
         errors: {}
     };
 
@@ -37,10 +30,25 @@ class GameForm extends Component{
         if (!data.img) errors.img = "This field can't be blank";
         if (!data.players) errors.players = "This field can't be blank";
         if(!data.publisher) errors.publisher = "This field can't be blank";
-        if(data.price == 0) errors.price = "This field can't be zero";
-        if(data.duration == 0) errors.duration = "This field can't be zero";
+        if(data.price === 0) errors.price = "This field can't be zero";
+        if(data.duration === 0) errors.duration = "This field can't be zero";
 
         return errors;
+    }
+
+    componentDidMount() {
+        if(this.props.game._id){
+            this.setState({data: this.props.game});
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.game._id && nextProps.game._id !== this.state.data._id) {
+            this.setState({data: nextProps.game})
+        }
+        if(!nextProps.game._id){
+            this.setState({data: initialData});
+        }
     }
 
     handleSubmit = e => {
@@ -49,7 +57,7 @@ class GameForm extends Component{
         this.setState({errors});
 
         if(Object.keys(errors).length === 0){
-            console.log(this.state.data);
+            this.props.submit(this.state.data);
         }
     };
 
@@ -65,19 +73,6 @@ class GameForm extends Component{
             data: { ...this.state.data, [e.target.name]: e.target.checked
             }
         });
-
-    handleGenderChange = genre =>
-        this.setState({
-            data: {
-                ...this.state.data, genre: genre._id
-            }
-        });
-
-    toggleTag = tag =>
-        this.state.tags.includes(tag._id)
-            ? this.setState({tags: this.state.tags.filter(id => id !== tag._id)})
-            : this.setState({tags: [...this.state.tags, tag._id]});
-
 
     render() {
         const {data, errors} = this.state;
@@ -172,45 +167,6 @@ class GameForm extends Component{
                     <label htmlFor="featured">Featured?</label>
                 </div>
 
-                <div className="field">
-                    <label>Tags</label>
-                    {
-                        tags.map(tag => (
-                            <div key={tag._id} className="inline field">
-                                <input
-                                    id={`tag-${tag._id}`}
-                                    type="checkbox"
-                                    checked={data.tags.includes(tag._id)}
-                                    onChange={() => this.toggleTag(tag)}
-                                />
-                                <label htmlFor={`tag-${tag._id}`}>{tag.name}</label>
-
-                            </div>
-                        ))
-                    }
-
-                </div>
-
-                <div className="field">
-                    <label>Genres</label>
-
-                    {
-                        genres.map(genre => (
-                            <div key={genre._id} className="inline field">
-                                <input
-                                    id={`genre-${genre._id}`}
-                                    type="radio"
-                                    checked={data.genre === genre._id}
-                                    onChange={() => this.handleGenderChange(genre)}
-                                />
-                                <label htmlFor={`genre-${genre._id}`}>{genre.name}</label>
-
-                            </div>
-                        ))
-                    }
-
-                </div>
-
                 <div className={errors.publisher ? "field error" : "field"}>
                     <label>Publishers</label>
                     <select name="publisher"
@@ -247,7 +203,17 @@ GameForm.propTypes = {
             name: PropTypes.string.isRequired
         })
     ).isRequired,
-    cancel: PropTypes.func.isRequired
+    cancel: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired,
+    game: PropTypes.shape({
+       name: PropTypes.string,
+       price: PropTypes.number,
+       players: PropTypes.string,
+       duration: PropTypes.number,
+       img: PropTypes.string,
+       description: PropTypes.string,
+       featured: PropTypes.bool
+    }).isRequired
 };
 
 GameForm.defaultProps = {

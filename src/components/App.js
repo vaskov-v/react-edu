@@ -24,6 +24,7 @@ const games = [
         players: "1-2",
         img: "123.png",
         duration: 60,
+        description: "Some description 1",
         publishers: 1
 
     },
@@ -35,6 +36,7 @@ const games = [
         players: "1",
         img: "123.png",
         duration: 160,
+        description: "Some description 2",
         publishers: 2
 
     },
@@ -46,6 +48,7 @@ const games = [
         players: "1-8",
         img: "123.png",
         duration: 76,
+        description: "Some description 3",
         publishers: 1
     }
 ];
@@ -53,24 +56,49 @@ const games = [
 class App extends React.Component{
     state = {
       games: [],
-      showGameForm: false
+      showGameForm: false,
+      selectedGame: {}
     };
 
     componentDidMount(){
         this.setState({
-            games: _orderBy(games, ["featured","name"], ["desc", "asc"])
+            games: this.sortGames(games)
         });
     };
 
-
-
+    sortGames(games){
+        return _orderBy(games, ["featured","name"], ["desc", "asc"]);
+    }
 
     toggleFeatured = (gameId) => {
-        alert(gameId);
+        const newGames = this.state.games.map(game => {
+            if(game._id === gameId) return {...game, featured: !game.featured};
+            return game;
+        })
+        this.setState({games: newGames})
     };
 
-    showGameForm = () => this.setState({showGameForm: true});
-    hideGameForm = () => this.setState({showGameForm: false});
+    showGameForm = () => this.setState({showGameForm: true, selectedGame: {}});
+    hideGameForm = () => this.setState({showGameForm: false, selectedGame: {}});
+    saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
+    updateGame = game => this.setState({
+        games: this.sortGames(this.state.games.map(item => item._id === game._id ? game : item)),
+        showGameForm: false
+    });
+    addGame = (game) => this.setState({
+        games: this.sortGames([
+            ...this.state.games,
+            {
+                ...game,
+                _id: new Date().getTime()
+            }
+        ]),
+        showGameForm: false
+    });
+    deleteGame = game => this.setState({
+        games: this.state.games.filter(item => item._id !== game._id)
+    }) ;
+    selectGameForEditing = game => this.setState({selectedGame: game, showGameForm: true});
 
 
     render(){
@@ -83,7 +111,11 @@ class App extends React.Component{
                 <div className="ui stackable grid">
                     {this.state.showGameForm &&(
                         <div className="nine wide column">
-                            <GameForm publishers={publishers} cancel={this.hideGameForm}/>
+                            <GameForm publishers={publishers}
+                                      cancel={this.hideGameForm}
+                                      submit={this.saveGame}
+                                      game={this.state.selectedGame}
+                            />
                         </div>
                     )}
 
@@ -91,6 +123,8 @@ class App extends React.Component{
                         <GameList
                             games={this.state.games}
                             toggleFeatured={this.toggleFeatured}
+                            editGame={this.selectGameForEditing}
+                            deleteGame={this.deleteGame}
                         />
                     </div>
                 </div>

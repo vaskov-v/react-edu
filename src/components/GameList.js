@@ -4,9 +4,9 @@ import GameCard from "./GameCard";
 
 
 
-const GameList = ({games, toggleFeatured}) =>(
+const GameList = ({games, toggleFeatured, editGame, deleteGame}) =>(
     <div className="ui three cards">
-        {games.map(game => <GameCard game={game} toggleFeatured={toggleFeatured} key={game._id}/>)}
+        {games.map(game => <GameCard game={game} toggleFeatured={toggleFeatured} key={game._id} editGame={editGame} deleteGame={deleteGame}/>)}
     </div>
 
 );
@@ -19,8 +19,10 @@ GameList.propTypes = {
             players: PropTypes.string.isRequired,
             duration: PropTypes.number.isRequired
         })
-    ).isRequired
-
+    ).isRequired,
+    toggleFeatured: PropTypes.func.isRequired,
+    editGame: PropTypes.func.isRequired,
+    deleteGame: PropTypes.func.isRequired
 };
 
 export default GameList;
