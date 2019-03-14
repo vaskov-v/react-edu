@@ -3,7 +3,6 @@ import _orderBy from "lodash/orderBy";
 import _find from "lodash/find";
 import GameList from "./GameList";
 import GameForm from "./GameForm";
-import GameNavigation from "./GameNavigation";
 import api from "../api";
 
 const publishers = [
@@ -80,7 +79,6 @@ class GamesPage extends React.Component{
 
         return(
             <div className="ui container">
-                <GameNavigation showGameForm={this.showGameForm}/>
                 <div className="ui stackable grid">
                     {this.state.showGameForm &&(
                         <div className="nine wide column">

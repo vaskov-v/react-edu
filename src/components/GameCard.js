@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Featured from "./Featured";
+import {Link} from "react-router-dom";
 
 class GameCard extends React.Component{
     state = {
@@ -38,7 +39,7 @@ class GameCard extends React.Component{
             }
 
                 <div className="content">
-                    <a href="/" className="header">{game.name}</a>
+                    <Link to={`/game/${game._id}`} className="header">{game.name}</Link>
                     <div className="meta">
                         <i className="icon users"></i> {game.players}
                         <i className="icon wait"></i>{game.duration} min.
