@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactImageFallback from "react-image-fallback";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import FormInlineMessage from "./FormInlineMessage";
 
 const initialData = {
@@ -21,7 +21,8 @@ class GameForm extends Component{
     state = {
         data: initialData,
         errors: {},
-        loading: false
+        loading: false,
+        redirect: false
     };
 
     validate(data) {
@@ -58,8 +59,10 @@ class GameForm extends Component{
         this.setState({errors});
         if(Object.keys(errors).length === 0){
             this.setState({loading: true});
-            this.props.submit(this.state.data)
-            .catch(err => this.setState({errors: err.response.data.errors, loading: false }));
+            this.props
+              .submit(this.state.data)
+              .then(() => this.setState({redirect: true}))
+              .catch(err => this.setState({errors: err.response.data.errors, loading: false }));
         }
     }
 
@@ -82,7 +85,7 @@ class GameForm extends Component{
         const formClassNames = loading ? "ui form loading" : "ui form";
         return (
             <form className={formClassNames} onSubmit={this.handleSubmit}>
-
+                {this.state.redirect && <Redirect to="/games" />}
                 <div className="ui grid">
                     <div className="twelve wide column">
 
