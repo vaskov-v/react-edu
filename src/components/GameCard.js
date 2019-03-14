@@ -16,7 +16,7 @@ class GameCard extends React.Component{
     hideDescription = () => this.setState({showDescription: false});
 
     render (){
-        const {game, toggleFeatured, editGame, deleteGame} = this.props;
+        const {game, toggleFeatured, deleteGame} = this.props;
         return(
             <div className="ui card">{
                 this.state.showDescription ? (
@@ -72,9 +72,9 @@ class GameCard extends React.Component{
                         </div>
                     ) : (
                         <div className="ui two buttons">
-                            <a className="ui green basic button" onClick={() => editGame(game)}>
+                            <Link className="ui green basic button" to={`/games/edit/${game._id}`}>
                                 <i className="ui icon edit"></i>
-                            </a>
+                            </Link>
                             <a className="ui red basic button" onClick={this.showConfirmation}>
                                 <i className="ui icon trash"></i>
                             </a>
@@ -99,7 +99,6 @@ GameCard.propTypes = {
         description: PropTypes.string.isRequired
     }).isRequired,
     toggleFeatured: PropTypes.func.isRequired,
-    editGame: PropTypes.func.isRequired,
     deleteGame: PropTypes.func.isRequired
 };
 

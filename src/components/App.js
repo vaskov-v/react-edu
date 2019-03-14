@@ -11,7 +11,7 @@ class App extends Component {
       <div className="ui container">
         <GameNavigation />
         <Route path="/" exact component={HomePage} />
-        <Route path="/games" exact component={GamesPage}/>
+        <Route path="/games" component={GamesPage}/>
         <Route path="/game/:_id" exact component={ShowGamePage}/>
       </div>
     );

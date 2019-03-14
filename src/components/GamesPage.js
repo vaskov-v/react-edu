@@ -1,6 +1,7 @@
 import React from "react";
 import _orderBy from "lodash/orderBy";
 import _find from "lodash/find";
+import {Route} from "react-router-dom";
 import GameList from "./GameList";
 import GameForm from "./GameForm";
 import api from "../api";
@@ -20,8 +21,6 @@ const publishers = [
 class GamesPage extends React.Component{
     state = {
       games: [],
-      showGameForm: false,
-      selectedGame: {},
       loading: true
     };
 
@@ -45,8 +44,6 @@ class GamesPage extends React.Component{
         })
     };
 
-    showGameForm = () => this.setState({showGameForm: true, selectedGame: {}});
-    hideGameForm = () => this.setState({showGameForm: false, selectedGame: {}});
     saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
     updateGame = gameData =>
       api.games.update(gameData).then(game =>
@@ -70,25 +67,35 @@ class GamesPage extends React.Component{
           games: this.state.games.filter(item => item._id !== game._id)
         })
       );
-    selectGameForEditing = game => this.setState({selectedGame: game, showGameForm: true});
+
 
 
     render(){
 
-        const numberOfColumns = this.state.showGameForm ? "seven" : "sixteen";
+        const numberOfColumns = this.props.location.pathname === '/games' ? "sixteen" : "seven";
 
         return(
             <div className="ui container">
                 <div className="ui stackable grid">
-                    {this.state.showGameForm &&(
-                        <div className="nine wide column">
-                            <GameForm publishers={publishers}
-                                      cancel={this.hideGameForm}
-                                      submit={this.saveGame}
-                                      game={this.state.selectedGame}
-                            />
-                        </div>
-                    )}
+                    <Route path="/games/new" render={() => (
+                      <div className="nine wide column">
+                        <GameForm publishers={publishers}
+                                  submit={this.saveGame}
+                                  game={{}}
+                        />
+                      </div>
+                    )} />
+
+                  <Route path="/games/edit/:_id" render={(props) => (
+                    <div className="nine wide column">
+                      <GameForm publishers={publishers}
+                                submit={this.saveGame}
+                                game={
+                                  _find(this.state.games, {_id: props.match.params._id}) || {}
+                                }
+                      />
+                    </div>
+                  )} />
 
                     <div className={`${numberOfColumns} wide column`}>
                       {
@@ -104,7 +111,6 @@ class GamesPage extends React.Component{
                           <GameList
                             games={this.state.games}
                             toggleFeatured={this.toggleFeatured}
-                            editGame={this.selectGameForEditing}
                             deleteGame={this.deleteGame}
                           />
                         )

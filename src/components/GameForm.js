@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactImageFallback from "react-image-fallback";
+import {Link} from "react-router-dom";
 import FormInlineMessage from "./FormInlineMessage";
 
 const initialData = {
@@ -188,7 +189,7 @@ class GameForm extends Component{
                 <div className="ui fluid buttons">
                     <button className="ui button" type="submit">Create</button>
                     <div className="or"></div>
-                    <a href="/" className="ui button" onClick={this.props.cancel}>Cancel</a>
+                    <Link to="/games" className="ui button" onClick={this.props.cancel}>Cancel</Link>
                 </div>
 
 
@@ -206,7 +207,6 @@ GameForm.propTypes = {
             name: PropTypes.string.isRequired
         })
     ).isRequired,
-    cancel: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     game: PropTypes.shape({
        _id: PropTypes.string,
