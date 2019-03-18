@@ -1,10 +1,13 @@
 import React, {Component} from "react";
 import SignUpForm from "./SignUpForm";
 import api from "../api";
+import PropTypes from "prop-types";
 
 class SignUpPage extends Component{
   submit = data =>
-    api.users.create(data).then(() => this.props.history.push("/login"));
+    api.users.create(data).then(() => {
+      this.props.setMessage("You have been sucessfully signed up!");
+      this.props.history.push("/login")});
 
   render() {
     return(
@@ -14,5 +17,9 @@ class SignUpPage extends Component{
     );
   }
 }
+
+SignUpPage.propTypes = {
+  setMessage: PropTypes.func.isRequired
+};
 
 export default SignUpPage;

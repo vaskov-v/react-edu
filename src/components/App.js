@@ -10,8 +10,11 @@ class App extends Component {
   state = {
     user: {
       token: "null"
-    }
+    },
+    message: ""
   };
+
+  setMessage = message => this.setState({message});
 
   logout = () => this.setState({user: {token: null}});
 
@@ -22,10 +25,17 @@ class App extends Component {
         isAuthenticated={!!this.state.user.token}
         logout={this.logout}
         />
+
+        {this.state.message && (
+          <div className="ui info message">
+            <i className="close icon" onClick={() => this.setMessage("")}></i>
+            {this.state.message}
+          </div>
+        )}
         <Route path="/" exact component={HomePage} />
         <Route path="/games" component={GamesPage}/>
         <Route path="/game/:_id" exact component={ShowGamePage}/>
-        <Route path="/signup" component={SignUpPage}/>
+        <Route path="/signup" render={props => (<SignUpPage {...props} setMessage={this.setMessage}/>)}/>
       </div>
     );
   }
