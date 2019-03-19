@@ -1,143 +1,81 @@
-import React from "react";
-import _orderBy from "lodash/orderBy";
-import GameList from "./GameList";
-import GameForm from "./GameForm";
+import React, {Component} from "react";
+import {Route} from "react-router-dom";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import HomePage from "./HomePage";
 import GameNavigation from "./GameNavigation";
+import GamesPage from "./GamesPage";
+import ShowGamePage from "./ShowGamePage";
+import SignUpPage from "./SignUpPage";
+import LoginPage from "./LoginPage";
 
-const publishers = [
-    {
-        _id: 1,
-        name: "Publisher_1"
+const setAuthorizationHeader = (token = null) => {
+  if(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common.Authorization;
+  }
+}
+
+class App extends Component {
+  state = {
+    user: {
+      token: "null",
+      role: "user"
     },
-    {
-      _id: 2,
-      name: "Publisher_2"
+    message: ""
+  };
+
+  componentDidMount() {
+    if(localStorage.bgshopToken){
+      this.setState({
+        user: {
+          token: localStorage.bgshopToken,
+          role: jwtDecode(localStorage.bgshopToken).user.role
+      }});
+      setAuthorizationHeader(localStorage.bgshopToken);
     }
-];
+  }
 
-const games = [
-    {
-        _id: 1,
-        featured: true,
-        name: "Some text",
-        price: 93,
-        players: "1-2",
-        img: "123.png",
-        duration: 60,
-        description: "Some description 1",
-        publishers: 1
+  setMessage = message => this.setState({message});
+  logout = () => {
+    this.setState({user: {token: null, role: "user"}});
+    setAuthorizationHeader();
+    localStorage.removeItem("bgshopToken")
+  }
+  login = token => {
+    this.setState({
+      user:{
+        token,
+        role: jwtDecode(token).user.role
+      }});
+    localStorage.bgshopToken = token;
+    setAuthorizationHeader(token);
+  };
 
-    },
-    {
-        _id: 2,
-        featured: true,
-        name: "Some text 2",
-        price: 34.23,
-        players: "1",
-        img: "123.png",
-        duration: 160,
-        description: "Some description 2",
-        publishers: 2
+  render() {
+    return (
+      <div className="ui container">
+        <GameNavigation
+        isAuthenticated={!!this.state.user.token}
+        logout={this.logout}
+        isAdmin={!!this.state.user.token && this.state.user.role === "admin"}
+        />
 
-    },
-    {
-        _id: 3,
-        featured: false,
-        name: "Some text 3",
-        price: 56.00,
-        players: "1-8",
-        img: "123.png",
-        duration: 76,
-        description: "Some description 3",
-        publishers: 1
-    }
-];
-
-class App extends React.Component{
-    state = {
-      games: [],
-      showGameForm: false,
-      selectedGame: {}
-    };
-
-    componentDidMount(){
-        this.setState({
-            games: this.sortGames(games)
-        });
-    };
-
-    sortGames(games){
-        return _orderBy(games, ["featured","name"], ["desc", "asc"]);
-    }
-
-    toggleFeatured = (gameId) => {
-        const newGames = this.state.games.map(game => {
-            if(game._id === gameId) return {...game, featured: !game.featured};
-            return game;
-        })
-        this.setState({games: newGames})
-    };
-
-    showGameForm = () => this.setState({showGameForm: true, selectedGame: {}});
-    hideGameForm = () => this.setState({showGameForm: false, selectedGame: {}});
-    saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
-    updateGame = game => this.setState({
-        games: this.sortGames(this.state.games.map(item => item._id === game._id ? game : item)),
-        showGameForm: false
-    });
-    addGame = (game) => this.setState({
-        games: this.sortGames([
-            ...this.state.games,
-            {
-                ...game,
-                _id: new Date().getTime()
-            }
-        ]),
-        showGameForm: false
-    });
-    deleteGame = game => this.setState({
-        games: this.state.games.filter(item => item._id !== game._id)
-    }) ;
-    selectGameForEditing = game => this.setState({selectedGame: game, showGameForm: true});
-
-
-    render(){
-
-        const numberOfColumns = this.state.showGameForm ? "seven" : "sixteen";
-
-        return(
-            <div className="ui container">
-                <GameNavigation showGameForm={this.showGameForm}/>
-                <div className="ui stackable grid">
-                    {this.state.showGameForm &&(
-                        <div className="nine wide column">
-                            <GameForm publishers={publishers}
-                                      cancel={this.hideGameForm}
-                                      submit={this.saveGame}
-                                      game={this.state.selectedGame}
-                            />
-                        </div>
-                    )}
-
-                    <div className={`${numberOfColumns} wide column`}>
-                        <GameList
-                            games={this.state.games}
-                            toggleFeatured={this.toggleFeatured}
-                            editGame={this.selectGameForEditing}
-                            deleteGame={this.deleteGame}
-                        />
-                    </div>
-                </div>
-
-                <br/>
-
-            </div>
-        );
-    };
-
-};
-
-
-
+        {this.state.message && (
+          <div className="ui info message">
+            <i className="close icon" onClick={() => this.setMessage("")}></i>
+            {this.state.message}
+          </div>
+        )}
+        <Route path="/" exact component={HomePage} />
+        <Route path="/games" render={props =><GamesPage {...props} user={this.state.user}/>}/>
+        <Route path="/game/:_id" exact component={ShowGamePage}/>
+        <Route path="/signup" render={props => (<SignUpPage {...props} setMessage={this.setMessage}/>)}/>
+        <Route path="/login" render={props => <LoginPage {...props} login={this.login}/>}/>
+      </div>
+    );
+  }
+}
 
 export default App;

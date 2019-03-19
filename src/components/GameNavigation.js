@@ -1,22 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {NavLink} from "react-router-dom";
 
-
-const GameNavigation = ({showGameForm}) => (
+const GameNavigation = ({ isAuthenticated, logout, isAdmin}) => (
     <div className="ui secondary pointing menu">
-        <a href="/" className="item"> Game Cards</a>
-        <a className="item" onClick={showGameForm}>
-            <i className="icon plus" /> Add New Game
-        </a>
+
+      <NavLink exact to="/" className="item">
+        GameCards
+      </NavLink>
+      <NavLink exact to="/games" className="item">
+        Games
+      </NavLink>
+      {isAdmin && (
+        <NavLink exact to="/games/new" className="item">
+          <i className="icon plus" /> Add New Game
+        </NavLink>
+      )}
+
+      {isAuthenticated ? (
         <div className="right menu">
-            <a className="item">Login</a>
-            <a className="item">Help</a>
+          <a onClick={logout} className="item">Logout</a>
         </div>
+      ) : (
+        <div className="right menu">
+          <NavLink to="/login" className="item">
+            Login
+          </NavLink>
+          <NavLink to="/signup" className="item">
+            SignUp
+          </NavLink>
+        </div>
+      )}
     </div>
 );
 
 GameNavigation.propTypes = {
-    showGameForm: PropTypes.func.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 export default GameNavigation;

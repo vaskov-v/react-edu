@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactImageFallback from "react-image-fallback";
+import {Link, Redirect} from "react-router-dom";
 import FormInlineMessage from "./FormInlineMessage";
 
 const initialData = {
-    _id: null,
     name: "",
     description: "",
     price: 0,
@@ -20,7 +20,9 @@ const initialData = {
 class GameForm extends Component{
     state = {
         data: initialData,
-        errors: {}
+        errors: {},
+        loading: false,
+        redirect: false
     };
 
     validate(data) {
@@ -53,13 +55,17 @@ class GameForm extends Component{
 
     handleSubmit = e => {
         e.preventDefault();
-        const errors = this.validate(this.state.data);
+        const errors = {};
         this.setState({errors});
-
         if(Object.keys(errors).length === 0){
-            this.props.submit(this.state.data);
+            this.setState({loading: true});
+            this.props
+              .submit(this.state.data)
+              .then(() => this.setState({redirect: true}))
+              .catch(err => this.setState({errors: err.response.data.errors, loading: false }));
         }
-    };
+    }
+
 
     handleChange = e =>
         this.setState({
@@ -75,10 +81,11 @@ class GameForm extends Component{
         });
 
     render() {
-        const {data, errors} = this.state;
+        const {data, errors, loading} = this.state;
+        const formClassNames = loading ? "ui form loading" : "ui form";
         return (
-            <form className="ui form" onSubmit={this.handleSubmit}>
-
+            <form className={formClassNames} onSubmit={this.handleSubmit}>
+                {this.state.redirect && <Redirect to="/games" />}
                 <div className="ui grid">
                     <div className="twelve wide column">
 
@@ -185,7 +192,7 @@ class GameForm extends Component{
                 <div className="ui fluid buttons">
                     <button className="ui button" type="submit">Create</button>
                     <div className="or"></div>
-                    <a href="/" className="ui button" onClick={this.props.cancel}>Cancel</a>
+                    <Link to="/games" className="ui button" onClick={this.props.cancel}>Cancel</Link>
                 </div>
 
 
@@ -199,13 +206,13 @@ class GameForm extends Component{
 GameForm.propTypes = {
     publishers: PropTypes.arrayOf(
         PropTypes.shape({
-            _id: PropTypes.number.isRequired,
+            _id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired
         })
     ).isRequired,
-    cancel: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     game: PropTypes.shape({
+       _id: PropTypes.string,
        name: PropTypes.string,
        price: PropTypes.number,
        players: PropTypes.string,
