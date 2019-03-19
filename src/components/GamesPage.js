@@ -1,10 +1,11 @@
 import React from "react";
 import _orderBy from "lodash/orderBy";
 import _find from "lodash/find";
-import {Route} from "react-router-dom";
 import GameList from "./GameList";
 import GameForm from "./GameForm";
 import api from "../api";
+import AdminRoute from "./AdminRoute";
+import PropTypes from "prop-types";
 
 const publishers = [
     {
@@ -16,7 +17,6 @@ const publishers = [
       name: "Publisher_2"
     }
 ];
-
 
 class GamesPage extends React.Component{
     state = {
@@ -68,8 +68,6 @@ class GamesPage extends React.Component{
         })
       );
 
-
-
     render(){
 
         const numberOfColumns = this.props.location.pathname === '/games' ? "sixteen" : "seven";
@@ -77,7 +75,8 @@ class GamesPage extends React.Component{
         return(
             <div className="ui container">
                 <div className="ui stackable grid">
-                    <Route path="/games/new" render={() => (
+
+                    <AdminRoute path="/games/new" user={this.props.user} render={() => (
                       <div className="nine wide column">
                         <GameForm publishers={publishers}
                                   submit={this.saveGame}
@@ -85,21 +84,22 @@ class GamesPage extends React.Component{
                         />
                       </div>
                     )} />
+                    <AdminRoute path="/games/edit/:_id" user={this.props.user} render={(props) => (
+                      <div className="nine wide column">
+                        <GameForm publishers={publishers}
+                                  submit={this.saveGame}
+                                  game={
+                                    _find(this.state.games, {_id: props.match.params._id}) || {}
+                                  }
+                        />
+                      </div>
+                    )} />
 
-                  <Route path="/games/edit/:_id" render={(props) => (
-                    <div className="nine wide column">
-                      <GameForm publishers={publishers}
-                                submit={this.saveGame}
-                                game={
-                                  _find(this.state.games, {_id: props.match.params._id}) || {}
-                                }
-                      />
-                    </div>
-                  )} />
-
-                    <div className={`${numberOfColumns} wide column`}>
-                      {
-                        this.state.loading ? (
+                  <div className={`${numberOfColumns} wide column`}>
+                    {
+                      this.state.loading ? (
+                        <div className="ui container">
+                          <br/>
                           <div className="ui icon message">
                             <i className="notched circle loading icon"></i>
                             <div className="content">
@@ -107,27 +107,33 @@ class GamesPage extends React.Component{
                               <p>Loading games collection...</p>
                             </div>
                           </div>
-                        ) : (
-                          <GameList
-                            games={this.state.games}
-                            toggleFeatured={this.toggleFeatured}
-                            deleteGame={this.deleteGame}
-                          />
-                        )
-                      }
-
-                    </div>
-                </div>
-
+                        </div>
+                      ) : (
+                        <div className="ui container">
+                          <br/>
+                           <GameList
+                             games={this.state.games}
+                             toggleFeatured={this.toggleFeatured}
+                             deleteGame={this.deleteGame}
+                             user={this.props.user}
+                           />
+                        </div>
+                      )
+                    }
+                  </div>
                 <br/>
-
+                </div>
             </div>
         );
     };
 
 };
 
-
-
+GamesPage.defaultProps = {
+  user: PropTypes.shape({
+    token: PropTypes.string,
+    role: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default GamesPage;

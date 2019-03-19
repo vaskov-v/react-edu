@@ -16,7 +16,38 @@ class GameCard extends React.Component{
     hideDescription = () => this.setState({showDescription: false});
 
     render (){
-        const {game, toggleFeatured, deleteGame} = this.props;
+        const {game, toggleFeatured, deleteGame, user} = this.props;
+        const adminActions = (
+          <div className="extra content">{
+              this.state.showConfirmation ? (
+                <div className="ui two buttons">
+                    <a className="ui red basic button" onClick={() => deleteGame(game)}>
+                        <i className="ui icon check"></i> YES
+                    </a>
+                    <a className="ui grey basic button" onClick={this.hideConfirmation}>
+                        <i className="ui icon close"></i> NO
+                    </a>
+                </div>
+              ) : (
+                <div className="ui two buttons">
+                    <Link className="ui green basic button" to={`/games/edit/${game._id}`}>
+                        <i className="ui icon edit"></i>
+                    </Link>
+                    <a className="ui red basic button" onClick={this.showConfirmation}>
+                        <i className="ui icon trash"></i>
+                    </a>
+
+                </div>
+              )
+          }
+          </div>
+        );
+        const addToCart = (
+          <div className="extra content">
+              <a className="ui green fluid button">Add to Cart</a>
+          </div>
+        );
+
         return(
             <div className="ui card">{
                 this.state.showDescription ? (
@@ -59,30 +90,9 @@ class GameCard extends React.Component{
 
                     </div>
                 </div>
-                <div className="extra content">{
-                    this.state.showConfirmation ? (
-                        <div className="ui two buttons">
-                            <a className="ui red basic button" onClick={() => deleteGame(game)}>
-                                <i className="ui icon check"></i> YES
-                            </a>
-                            <a className="ui grey basic button" onClick={this.hideConfirmation}>
-                                <i className="ui icon close"></i> NO
-                            </a>
 
-                        </div>
-                    ) : (
-                        <div className="ui two buttons">
-                            <Link className="ui green basic button" to={`/games/edit/${game._id}`}>
-                                <i className="ui icon edit"></i>
-                            </Link>
-                            <a className="ui red basic button" onClick={this.showConfirmation}>
-                                <i className="ui icon trash"></i>
-                            </a>
-
-                        </div>
-                    )
-                }
-                </div>
+                {user.token && user.role === 'user' && addToCart}
+                {user.token && user.role === 'admin' && adminActions}
             </div>
         )
     }
@@ -99,8 +109,11 @@ GameCard.propTypes = {
         description: PropTypes.string.isRequired
     }).isRequired,
     toggleFeatured: PropTypes.func.isRequired,
-    deleteGame: PropTypes.func.isRequired
+    deleteGame: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+        token: PropTypes.string,
+        role: PropTypes.string.isRequired
+    }).isRequired
 };
-
 
 export default GameCard;
