@@ -48,6 +48,14 @@ class GameCard extends React.Component{
           </div>
         );
 
+        const adminFeatured = (
+          <Featured
+            featured={game.featured}
+            toggleFeatured={toggleFeatured}
+            gameId={game._id}
+           />
+        );
+
         return(
             <div className="ui card">{
                 this.state.showDescription ? (
@@ -59,11 +67,7 @@ class GameCard extends React.Component{
                 ) : (
                      <div className="image">
                         <span className="ui green ribbon label">{game.price}</span>
-                        <Featured
-                            featured={game.featured}
-                            toggleFeatured={toggleFeatured}
-                            gameId={game._id}
-                        />
+                         {user.token && user.role === 'admin' && adminFeatured}
                         <img src={game.img} alt="Game Cover"/>
                     </div>
                 )

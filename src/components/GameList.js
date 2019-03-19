@@ -3,15 +3,29 @@ import PropTypes from "prop-types";
 import GameCard from "./GameCard";
 
 const GameList = ({games, toggleFeatured, deleteGame, user}) =>(
-    <div className="ui three cards">
-        {games.map(game => <GameCard game={game}
-                                     toggleFeatured={toggleFeatured}
-                                     key={game._id}
-                                     deleteGame={deleteGame}
-                                     user={user}
-        />)}
-    </div>
 
+    <div className="ui three cards">
+      {user.token && user.role === 'admin' ?
+        games.map(game =>
+          <GameCard game={game}
+                    toggleFeatured={toggleFeatured}
+                    key={game._id}
+                    deleteGame={deleteGame}
+                    user={user}
+          />
+        ) : (
+          games.map(game =>
+            game.featured === true && <GameCard game={game}
+                                                toggleFeatured={toggleFeatured}
+                                                key={game._id}
+                                                deleteGame={deleteGame}
+                                                user={user}
+            />
+          )
+        )
+      }
+
+    </div>
 );
 
 GameList.propTypes = {
